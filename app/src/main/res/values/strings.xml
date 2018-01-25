@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">NiXuBCalc</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="text_welcome_screen">Здраствуй,</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_shennon">Формула Шеннона</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_arctan">Arctan</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_display_name">Username</string>
+    <string name="pref_default_display_name">Guest</string>
+
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+
+    <!-- Strings related to Settings -->
+
+
+</resources>
