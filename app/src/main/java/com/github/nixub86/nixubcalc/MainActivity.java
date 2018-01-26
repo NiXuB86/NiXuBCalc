@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -31,6 +30,7 @@ public class MainActivity extends AppCompatActivity
     //Context mContext;
     TextView WelcomeTextView;
     String username;
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +45,19 @@ public class MainActivity extends AppCompatActivity
             mPhoneNumber = tMgr.getLine1Number();
         }*/
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        username = sharedPreferences.getString("PREF_USERNAME", "Guest");
+        /*Context context = this;
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);*/
+        //sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        //SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        //username = sharedPreferences.getString("PREF_USERNAME", "Guest");
+        //SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        //username = sharedPref.getString("PREF_USERNAME", "Guest");
+        sharedPref = this.getPreferences(Context.MODE_PRIVATE);
 
 
-        WelcomeTextView.setText("Здраствуй," + username + "!");
+
         //System.out.println(getPhoneNumber());
 /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -69,6 +77,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        username = sharedPref.getString("PREF_USERNAME", "Guest");
+        WelcomeTextView.setText("Здраствуй, " + username + "!");
+        super.onResume();
     }
 
     @Override
