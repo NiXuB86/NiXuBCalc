@@ -11,9 +11,9 @@
 
     <EditText
         android:id="@+id/editTextShennon"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:ems="10"
@@ -39,11 +39,37 @@
         android:layout_marginBottom="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:scrollbars = "vertical"
+        android:layout_marginTop="8dp"
+        android:scrollbars="vertical"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNSShennon" />
+
+    <CheckBox
+        android:id="@+id/checkBoxSpacesShennon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:text="Считать пробелы"
+        app:layout_constraintStart_toStartOf="@+id/editTextShennon"
+        app:layout_constraintTop_toBottomOf="@+id/editTextShennon" />
+
+    <EditText
+        android:id="@+id/editTextNSShennon"
+        android:layout_width="157dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Основание СС"
+        android:inputType="number"
+        android:text="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxSpacesShennon"
         app:layout_constraintTop_toBottomOf="@+id/editTextShennon" />
 </android.support.constraint.ConstraintLayout>

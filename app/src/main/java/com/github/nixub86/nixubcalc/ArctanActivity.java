@@ -45,8 +45,8 @@ public class ArctanActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 editArctan = editTArctan.getText().toString();
-                editArctan = editArctan.replaceAll("[^0-9.]","");
                 editArctan = editArctan.replace(",",".");
+                editArctan = editArctan.replaceAll("[^0-9.]","");
                 arctan = Double.parseDouble(editArctan);
                 radians = Math.atan(arctan);
                 degrees = Math.toDegrees(radians);

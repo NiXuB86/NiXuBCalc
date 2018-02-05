@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.text.method.ScrollingMovementMethod;
@@ -21,10 +22,18 @@ public class ShennonActivity extends AppCompatActivity
     String editShennon;
     EditText editTShennon;
     TextView textVShennon;
-    int[] numberofletter = new int[33];
-    char[] charofletters = new char[33];
+    CheckBox checkBoxShennon;
+    EditText editTNSShennon;
+    int[] numberofletter = new int[36];
+    char[] charofletters = new char[36];
     String outputText;
+    String editNSShennon;
     double H;
+    double NS;
+    Boolean checkSpaces;
+    int StringLength;
+    int numberOfSpaces;
+    double Pi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +43,18 @@ public class ShennonActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         charofletters = new char[]{'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й',
                 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч',
-                'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я'};
+                'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я', ' '};
         outputText = "Буквы: ";
+        editNSShennon = "";
         H=0;
+        checkSpaces = false;
+        numberOfSpaces = 0;
+        Pi = 0.0;
+        NS = 0.0;
 
         editTShennon = (EditText)  findViewById(R.id.editTextShennon);
+        editTNSShennon = (EditText) findViewById(R.id.editTextNSShennon);
+        checkBoxShennon= (CheckBox) findViewById(R.id.checkBoxSpacesShennon);
         textVShennon = (TextView)  findViewById(R.id.textViewShennon);
         textVShennon.setMovementMethod(new ScrollingMovementMethod());
 
@@ -46,14 +62,23 @@ public class ShennonActivity extends AppCompatActivity
         CalcButtonShennon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                numberOfSpaces = 0;
+                Pi = 0.0;
                 H=0.0;
-                numberofletter = new int[33];
+                numberofletter = new int[36];
                 //textVShennon.setText(null);
                 outputText = "Буквы: ";
                 editShennon = editTShennon.getText().toString();
+                editNSShennon = editTNSShennon.getText().toString();
+                editNSShennon = editNSShennon.replace(",",".");
+                editNSShennon = editNSShennon.replaceAll("[^0-9.]","");
+                NS = Double.parseDouble(editNSShennon);
+                System.out.println("Система счисления: " + NS);
                 System.out.println("Введенно: " + editShennon);
                 editShennon = editShennon.toLowerCase();
                 System.out.println("Переведенно в нижний регистр: " + editShennon);
+                checkSpaces = checkBoxShennon.isChecked();
+                StringLength = editShennon.length();
                 for (char element : editShennon.toCharArray()){
                     if (element == charofletters[0]) numberofletter[0]++;
                     if (element == charofletters[1]) numberofletter[1]++;
@@ -88,16 +113,37 @@ public class ShennonActivity extends AppCompatActivity
                     if (element == charofletters[30]) numberofletter[30]++;
                     if (element == charofletters[31]) numberofletter[31]++;
                     if (element == charofletters[32]) numberofletter[32]++;
+                    if (element == charofletters[33]) numberofletter[33]++;
+                    //if (element == charofletters[34]) numberofletter[34]++;
                 }
                 for (int i = 0; i < numberofletter.length-1; i++) {
+                    if (numberofletter[i] > 0 && charofletters[i] == ' ') {
+                        numberOfSpaces = numberofletter[i];
+                    }
+                }
+                System.out.println("Длина строки: " + StringLength);
+                System.out.println("Пробелы: " + numberOfSpaces);
+                System.out.println("Проверять пробелы: " + checkSpaces);
+                if (!checkSpaces) {
+                    StringLength = StringLength - numberOfSpaces;
+                }
+                System.out.println("Длина строки - пробелы: " + StringLength);
+                for (int i = 0; i < numberofletter.length-1; i++) {
                     if (numberofletter[i] > 0) {
-                        outputText=outputText+"\n" + charofletters[i] + ": " + numberofletter[i];
-                        H=H-((double)numberofletter[i]/(double)editShennon.length())
-                                *log2((double)numberofletter[i]/(double)editShennon.length());
+                        if (checkSpaces && charofletters[i] == ' ') {
+                            Pi = (double) numberofletter[i] / (double) StringLength;
+                            outputText = outputText + "\n" + "Пробелы: " + numberofletter[i];
+                            H = H - ((double) numberofletter[i] / (double) StringLength)
+                                    * log((double) numberofletter[i] / (double) StringLength, NS);
+                        } else if (charofletters[i] != ' '){
+                            Pi = (double) numberofletter[i] / (double) StringLength;
+                            outputText = outputText + "\n" + charofletters[i] + ": " + numberofletter[i] + "  Pi=" + Pi;
+                            H = H - (Pi) * log((double) numberofletter[i] / (double) StringLength, NS);
+                        }
                     }
                 }
                 System.out.println(H);
-                textVShennon.setText("Введённая строка: " + editShennon + "\n" + outputText + "\n N: " + editShennon.length() + "\n H: " + H);
+                textVShennon.setText("Введённая строка: " + editShennon + "\n" + outputText + "\n N: " + StringLength + "\n H: " + H);
             }
         });
 
@@ -114,6 +160,10 @@ public class ShennonActivity extends AppCompatActivity
     public static double log2(double num)
     {
         return (Math.log(num)/Math.log(2));
+    }
+    public static double log(double num, double NS)
+    {
+        return (Math.log(num)/Math.log(NS));
     }
 
     @Override
