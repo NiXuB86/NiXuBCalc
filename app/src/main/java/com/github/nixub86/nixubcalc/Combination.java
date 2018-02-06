@@ -2,9 +2,6 @@ package com.github.nixub86.nixubcalc;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,41 +15,47 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ArctanActivity extends AppCompatActivity
+public class Combination extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    String editArctan;
-    EditText editTArctan;
-    TextView textVArctan;
-    String outputText;
-    double arctan = 0.0;
-    double radians = 0.0;
-    double degrees = 0.0;
+    EditText editTextKCombination;
+    EditText editTextNCombination;
+    Button ButtonCalculateCombination;
+    TextView textViewOutputCombination;
+    String editK;
+    String editN;
+    String output;
+    int K;
+    int N;
+    double C;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_arctan);
+        setContentView(R.layout.activity_combination);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        outputText = "";
+        editK = "";
+        editN = "";
+        output = "";
 
-        editTArctan = (EditText) findViewById(R.id.editTextArctan);
-        textVArctan = (TextView) findViewById(R.id.textViewArctan);
-        textVArctan.setMovementMethod(new ScrollingMovementMethod());
+        editTextKCombination = (EditText) findViewById(R.id.editTextKCombination);
+        editTextNCombination = (EditText) findViewById(R.id.editTextNCombination);
+        textViewOutputCombination = (TextView) findViewById(R.id.textViewOutputCombination);
 
-        Button CalcButtonArctan = (Button) findViewById(R.id.CalcButtonArctan);
-        CalcButtonArctan.setOnClickListener(new View.OnClickListener() {
+        ButtonCalculateCombination = (Button) findViewById(R.id.ButtonCalculateCombination);
+        ButtonCalculateCombination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editArctan = editTArctan.getText().toString();
-                editArctan = editArctan.replace(",",".");
-                editArctan = editArctan.replaceAll("[^0-9.]","");
-                arctan = Double.parseDouble(editArctan);
-                radians = Math.atan(arctan);
-                degrees = Math.toDegrees(radians);
-                outputText = "Аркгангенс " + arctan + "= " + radians + " радиан или = " + degrees + "Градусов";
-                textVArctan.setText(outputText + "");
-
+                editK = editTextKCombination.getText().toString();
+                editN = editTextNCombination.getText().toString();
+                editK = editK.replaceAll("[^0-9]","");
+                editN = editN.replaceAll("[^0-9]","");
+                K = Integer.parseInt(editK);
+                N = Integer.parseInt(editN);
+                C = (double) NXBMathUtils.factorial(K)/(NXBMathUtils.factorial(N)*NXBMathUtils.factorial(N-K));
+                output = "" + String.format("%f" ,C);
+                textViewOutputCombination.setText(output);
             }
         });
 
@@ -79,7 +82,7 @@ public class ArctanActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.arctan, menu);
+        getMenuInflater().inflate(R.menu.combination, menu);
         return true;
     }
 

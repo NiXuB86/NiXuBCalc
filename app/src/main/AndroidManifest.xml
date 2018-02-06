@@ -31,6 +31,10 @@
         <activity
             android:name=".ArctanActivity"
             android:label="@string/title_activity_arctan"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Combination"
+            android:label="@string/title_activity_combination"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

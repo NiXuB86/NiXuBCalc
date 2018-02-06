@@ -126,6 +126,7 @@ public class MainActivity extends AppCompatActivity
         Intent shennon = new Intent(this, ShennonActivity.class);
         Intent settings = new Intent(this, SettingsActivity.class);
         Intent arctan = new Intent(this, ArctanActivity.class);
+        Intent combination = new Intent(this, Combination.class);
 
         if (id == R.id.nav_shennon) {
             startActivity(shennon);
@@ -133,6 +134,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(settings);
         } else if (id == R.id.nav_arctan) {
             startActivity(arctan);
+        } else if (id == R.id.nav_combination){
+            startActivity(combination);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

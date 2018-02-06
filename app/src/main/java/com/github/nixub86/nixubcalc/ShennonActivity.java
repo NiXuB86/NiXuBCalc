@@ -134,11 +134,11 @@ public class ShennonActivity extends AppCompatActivity
                             Pi = (double) numberofletter[i] / (double) StringLength;
                             outputText = outputText + "\n" + "Пробелы: " + numberofletter[i];
                             H = H - ((double) numberofletter[i] / (double) StringLength)
-                                    * log((double) numberofletter[i] / (double) StringLength, NS);
+                                    * NXBMathUtils.logb((double) numberofletter[i] / (double) StringLength, NS);
                         } else if (charofletters[i] != ' '){
                             Pi = (double) numberofletter[i] / (double) StringLength;
                             outputText = outputText + "\n" + charofletters[i] + ": " + numberofletter[i] + "  Pi=" + Pi;
-                            H = H - (Pi) * log((double) numberofletter[i] / (double) StringLength, NS);
+                            H = H - (Pi) * NXBMathUtils.logb((double) numberofletter[i] / (double) StringLength, NS);
                         }
                     }
                 }
@@ -157,14 +157,7 @@ public class ShennonActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    public static double log2(double num)
-    {
-        return (Math.log(num)/Math.log(2));
-    }
-    public static double log(double num, double NS)
-    {
-        return (Math.log(num)/Math.log(NS));
-    }
+
 
     @Override
     public void onBackPressed() {
@@ -206,6 +199,7 @@ public class ShennonActivity extends AppCompatActivity
         Intent shennon = new Intent(this, ShennonActivity.class);
         Intent settings = new Intent(this, SettingsActivity.class);
         Intent arctan = new Intent(this, ArctanActivity.class);
+        Intent combination = new Intent(this, Combination.class);
 
         if (id == R.id.nav_shennon) {
             startActivity(shennon);
@@ -213,6 +207,8 @@ public class ShennonActivity extends AppCompatActivity
             startActivity(settings);
         } else if (id == R.id.nav_arctan) {
             startActivity(arctan);
+        } else if (id == R.id.nav_combination){
+            startActivity(combination);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
