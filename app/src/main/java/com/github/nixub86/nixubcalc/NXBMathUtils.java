@@ -6,10 +6,16 @@ package com.github.nixub86.nixubcalc;
 
 public class NXBMathUtils {
 
-    public static int factorial(int n)
+    public static Integer factorial(Integer n)
     {
         if (n == 0) return 1;
         return n * factorial(n-1);
+    }
+    public static String niceDoubleOutput(Double d) {
+        if (d % 1.0 != 0)
+            return String.format("%s", d);
+        else
+            return String.format("%.0f",d);
     }
 
     public static double log2(double num)

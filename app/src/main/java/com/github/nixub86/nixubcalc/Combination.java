@@ -24,8 +24,8 @@ public class Combination extends AppCompatActivity
     String editK;
     String editN;
     String output;
-    int K;
-    int N;
+    Integer K;
+    Integer N;
     double C;
 
 
@@ -52,9 +52,17 @@ public class Combination extends AppCompatActivity
                 editK = editK.replaceAll("[^0-9]","");
                 editN = editN.replaceAll("[^0-9]","");
                 K = Integer.parseInt(editK);
+                System.out.println(K);
                 N = Integer.parseInt(editN);
-                C = (double) NXBMathUtils.factorial(K)/(NXBMathUtils.factorial(N)*NXBMathUtils.factorial(N-K));
-                output = "" + String.format("%f" ,C);
+                System.out.println(N);
+                System.out.println(NXBMathUtils.factorial(K));
+                System.out.println(NXBMathUtils.factorial(N));
+                System.out.println(NXBMathUtils.factorial(N-K));
+                C = (double) NXBMathUtils.factorial(N)/(NXBMathUtils.factorial(K)*NXBMathUtils.factorial(N-K));
+                System.out.println(C);
+                //output = "" + String.format("%.12f" ,C);
+                output = "" + NXBMathUtils.niceDoubleOutput(C);
+                System.out.println(output);
                 textViewOutputCombination.setText(output);
             }
         });
