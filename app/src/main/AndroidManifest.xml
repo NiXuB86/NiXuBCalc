@@ -35,6 +35,10 @@
         <activity
             android:name=".Combination"
             android:label="@string/title_activity_combination"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".StringCalc"
+            android:label="@string/title_activity_string_calc"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
